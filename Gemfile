@@ -40,3 +40,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "rack-cors", "~> 1.1"
+
+gem "rack-attack", "~> 6.5"
+
+gem 'devise', '~> 4.4'
