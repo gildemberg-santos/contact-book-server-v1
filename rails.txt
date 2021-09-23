@@ -1,0 +1,88 @@
+rails new contact-book-server --api --database=postgresql
+
+rails g scaffold tasks title:string done:boolean
+
+criar 
+
+rails g scaffold admin name:string email:string password:string
+rails g scaffold contact name:string cpf:string email:string dateOfBirth:string admin:references
+rails g scaffold address cep:string road:string number:string district:string city:string states:string contact:references admin:references
+
+
+
+
+rails g model contact name:string cpf:string email:string dateOfBirth:string user:references
+rails g model address cep:string road:string number:string district:string city:string states:string contact:references user:references 
+
+deletar
+rails d scaffold users
+rails d scaffold contacts
+rails d scaffold addresss
+
+rails db:drop
+
+rails db:create db:migrate
+
+Contact.create(name: 'Gildemberg', cpf: '058.577.663-62', email: 'gildemberg.santos@gmail.com', dateOfBirth: '1993/05/11')
+
+rails db:seed 
+
+email gildemberg.santos@gmail.com
+password 12345678
+token x4vuxsdmVy2-vuzwmahJ
+-----------------------------------------------------------
+
+Este teste deve ser escrito em Ruby on Rails;
+O objetivo do teste é avaliar a capacidade de resolver problemas e não a qualidade do código;
+O resultado deve ser hospedado no github.
+O teste deverá conter um arquivo README com as informações de como executar o projeto.
+
+------------------------------------------------------------
+
+Sua tarefa consiste em criar um sistema para uma ​agenda de contatos​: 
+Tela para cadastro dos dados pessoais do contato: 
+ 
+Quero que o sistema tenha uma tela para cadastrar os dados pessoais do contato: 
+● Nome Completo; 
+● CPF - deve ser único no banco de dados; 
+● E-mail - deve ser único no banco de dados; 
+● Data de nascimento - salva no banco no formato ano/mês/dia (AAAA/MM/DD), 
+mas exibida para o cliente no formato dia/mês/ano (DD/MM/AAAA);
+
+name
+cpf
+email
+dateOfBirth
+
+----------------------------------------------------------------------
+
+Após cadastrar o usuário deverá ser possível cadastrar um endereço para ele com os seguintes campos: 
+● CEP; (Ao digitar o CEP o sistema deve consultar a API ​http://viacep.com.br/​, e carregar automaticamente os dados de: rua, bairro, cidade e estado);
+● Rua; 
+● Número; 
+● Bairro; 
+● Cidade; 
+● Estados - (usar seletor para que eu possa escolher o estado)
+
+cep
+road
+number
+district
+city
+states
+
+-----------------------------------------------------------------------
+
+Esta tela deve ter um campo de entrada de texto, onde possa pesquisar o  contato pelo nome (busca do tipo ​%like%​); 
+Para todos os contatos que resultar, carregue e mostre na tela em lista todos os seus respectivos dados.
+
+-----------------------------------------------------------------------
+
+Tela de Login;
+Testes;
+hospedar o projeto no heroku;
+Bibliotecas como ReacJS para o frontend;
+Uso de uma lib de layout como Bootstrap;
+Bibliotecas de apoio(gems).
+
+
