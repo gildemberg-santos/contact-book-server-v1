@@ -2,7 +2,7 @@ rails new contact-book-server --api --database=postgresql
 
 rails g scaffold tasks title:string done:boolean
 
-criar 
+criar  
 
 rails g scaffold admin name:string email:string password:string
 rails g scaffold contact name:string cpf:string email:string dateOfBirth:string admin:references
