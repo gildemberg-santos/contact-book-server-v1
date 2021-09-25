@@ -3,8 +3,15 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
-    @contacts = Contact.all
-
+    @contacts = Array.new
+    v = "#{params["contact"]["q"]}".downcase
+    q = Contact.order(name: :asc)
+    count = 0
+    for item in q do
+      if item.name.downcase.include? v
+        @contacts.push(item)
+      end
+    end
     render json: @contacts
   end
 
@@ -35,6 +42,7 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   def destroy
+    puts 'testou apagar'
     @contact.destroy
   end
 
