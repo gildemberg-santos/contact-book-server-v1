@@ -37,8 +37,9 @@ class AddressesController < ApplicationController
 
   # DELETE /addresses/1
   def destroy
-    @address.destroy
-    render json: @address
+    @address.each do |address|
+      address.destroy
+    end
   end
 
   private
@@ -52,11 +53,10 @@ class AddressesController < ApplicationController
       contact_id = params["address"]["contact_id"].to_i
       if admin_id != 0
         @address = Address.where admin_id: admin_id
-        # @contacts = Contact.where("name LIKE ?", "%#{v}%")
       elsif contact_id != 0
         @address = Address.where contact_id: contact_id
       else 
-        @address = Address.find(params[:id])
+        @address = Address.where id: params[:id]
       end
     end
 

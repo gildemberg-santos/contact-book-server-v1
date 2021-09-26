@@ -42,8 +42,9 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   def destroy
-    @contact.destroy
-    render json: @contact
+    @contact.each do |contact|
+      contact.destroy
+    end 
   end
 
   private
@@ -57,7 +58,7 @@ class ContactsController < ApplicationController
       if admin_id != 0
         @contact = Contact.where admin_id: admin_id
       else 
-        @contact = Contact.find(params[:id])
+        @contact = Contact.where id: params[:id]
       end
     end
 
