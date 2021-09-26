@@ -1,17 +1,16 @@
+require 'date'
+
 class ContactsController < ApplicationController
-  before_action :set_contact, only: [:show, :update, :destroy]
+  before_action :set_contact, only: [:show, :update]
+  before_action :set_contact_destroy, only: [:destroy]
 
   # GET /contacts
   def index
-    @contacts = Array.new
-    v = "#{params["contact"]["q"]}".downcase
-    q = Contact.order(name: :asc)
-    count = 0
-    for item in q do
-      if item.name.downcase.include? v
-        @contacts.push(item)
-      end
-    end
+    v = "#{params["contact"]["q"]}"
+    # LIKE %q%
+    @contacts = Contact.where("name LIKE ?", "%#{v}%")
+    # DATA DIA/MÊS/ANO
+    @contacts.each { |item| item.dateOfBirth = date_output(item.dateOfBirth) }
     render json: @contacts
   end
 
@@ -23,7 +22,8 @@ class ContactsController < ApplicationController
   # POST /contacts
   def create
     @contact = Contact.new(contact_params)
-
+    # DATA ANO/MÊS/DIA
+    @contact.dateOfBirth = date_input(@contact.dateOfBirth)
     if @contact.save
       render json: @contact, status: :created, location: @contact
     else
@@ -42,8 +42,8 @@ class ContactsController < ApplicationController
 
   # DELETE /contacts/1
   def destroy
-    puts 'testou apagar'
     @contact.destroy
+    render json: @contact
   end
 
   private
@@ -51,9 +51,32 @@ class ContactsController < ApplicationController
     def set_contact
       @contact = Contact.find(params[:id])
     end
+    
+    def set_contact_destroy
+      admin_id = params["contact"]["admin_id"].to_i
+      if admin_id != 0
+        @contact = Contact.where admin_id: admin_id
+      else 
+        @contact = Contact.find(params[:id])
+      end
+    end
 
     # Only allow a list of trusted parameters through.
     def contact_params
       params.require(:contact).permit(:name, :cpf, :email, :dateOfBirth, :admin_id)
+    end
+
+    def address_params
+      params.require(:address).permit(:cep, :road, :number, :district, :city, :states, :contact_id, :admin_id)
+    end
+    
+    def date_input(valor)
+      tdate = DateTime.parse(valor)
+      tdate.strftime("%Y/%m/%d")
+    end
+
+    def date_output(valor)
+      tdate = DateTime.parse(valor)
+      tdate.strftime("%d/%m/%Y")
     end
 end
