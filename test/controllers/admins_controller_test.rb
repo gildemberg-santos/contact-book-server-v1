@@ -12,7 +12,7 @@ class AdminsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create admin" do
     assert_difference('Admin.count') do
-      post admins_url, params: { admin: { email: @admin.email, name: @admin.name, password: @admin.password } }, as: :json
+      post admins_url, params: { admin: { email: @admin.email, name: @admin.name, password: @admin.password, token: @admin.token } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class AdminsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update admin" do
-    patch admin_url(@admin), params: { admin: { email: @admin.email, name: @admin.name, password: @admin.password } }, as: :json
+    patch admin_url(@admin), params: { admin: { email: @admin.email, name: @admin.name, password: @admin.password, token: @admin.token } }, as: :json
     assert_response 200
   end
 
