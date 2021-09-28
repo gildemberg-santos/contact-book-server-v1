@@ -5,11 +5,9 @@ one:
   cpf: MyString
   email: MyString
   dateOfBirth: MyString
-  admin: one
 
 two:
   name: MyString
   cpf: MyString
   email: MyString
   dateOfBirth: MyString
-  admin: two

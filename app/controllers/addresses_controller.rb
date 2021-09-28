@@ -5,8 +5,7 @@ class AddressesController < ApplicationController
   # GET /addresses
   def index
     contact_id = params["address"]["contact_id"].to_i
-    admin_id = params["address"]["admin_id"].to_i
-    @addresses = Address.where contact_id: contact_id, admin_id: admin_id 
+    @addresses = Address.where contact_id: contact_id
     render json: @addresses
   end
 
@@ -49,11 +48,8 @@ class AddressesController < ApplicationController
     end
 
     def set_address_destroy
-      admin_id = params["address"]["admin_id"].to_i
       contact_id = params["address"]["contact_id"].to_i
-      if admin_id != 0
-        @address = Address.where admin_id: admin_id
-      elsif contact_id != 0
+      if contact_id != 0
         @address = Address.where contact_id: contact_id
       else 
         @address = Address.where id: params[:id]
@@ -62,6 +58,6 @@ class AddressesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.require(:address).permit(:cep, :road, :number, :district, :city, :states, :contact_id, :admin_id)
+      params.require(:address).permit(:cep, :road, :number, :district, :city, :states, :contact_id)
     end
 end

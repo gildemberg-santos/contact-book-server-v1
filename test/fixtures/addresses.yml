@@ -8,7 +8,6 @@ one:
   city: MyString
   states: MyString
   contact: one
-  admin: one
 
 two:
   cep: MyString
@@ -18,4 +17,3 @@ two:
   city: MyString
   states: MyString
   contact: two
-  admin: two

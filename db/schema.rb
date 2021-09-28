@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_163600) do
+ActiveRecord::Schema.define(version: 2021_09_28_224617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,20 +23,9 @@ ActiveRecord::Schema.define(version: 2021_09_28_163600) do
     t.string "city"
     t.string "states"
     t.bigint "contact_id", null: false
-    t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_addresses_on_admin_id"
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
-  end
-
-  create_table "admins", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.string "token"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -44,13 +33,9 @@ ActiveRecord::Schema.define(version: 2021_09_28_163600) do
     t.string "cpf"
     t.string "email"
     t.string "dateOfBirth"
-    t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["admin_id"], name: "index_contacts_on_admin_id"
   end
 
-  add_foreign_key "addresses", "admins"
   add_foreign_key "addresses", "contacts"
-  add_foreign_key "contacts", "admins"
 end

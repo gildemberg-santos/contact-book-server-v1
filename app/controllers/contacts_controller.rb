@@ -54,21 +54,12 @@ class ContactsController < ApplicationController
     end
     
     def set_contact_destroy
-      admin_id = params["contact"]["admin_id"].to_i
-      if admin_id != 0
-        @contact = Contact.where admin_id: admin_id
-      else 
-        @contact = Contact.where id: params[:id]
-      end
+      @contact = Contact.where id: params[:id]
     end
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:name, :cpf, :email, :dateOfBirth, :admin_id)
-    end
-
-    def address_params
-      params.require(:address).permit(:cep, :road, :number, :district, :city, :states, :contact_id, :admin_id)
+      params.require(:contact).permit(:name, :cpf, :email, :dateOfBirth)
     end
     
     def date_input(valor)
