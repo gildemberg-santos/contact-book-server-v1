@@ -1,11 +1,14 @@
+require 'base64'
+
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :update, :destroy]
 
   # GET /admins
   def index
-    @admins = Admin.all
-
-    render json: @admins
+    # @admins = Admin.all
+    token = params["admin"]["token"].to_s
+    @admin = Admin.find_by(token: token)
+    render json: @admin
   end
 
   # GET /admins/1
