@@ -6,6 +6,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
+    # TODO refatorar
     v = "#{params["contact"]["q"]}"
     # LIKE %q%
     @contacts = Contact.where("name LIKE ?", "%#{v}%")
