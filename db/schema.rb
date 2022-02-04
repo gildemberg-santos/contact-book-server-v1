@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_09_28_224617) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "addresses", force: :cascade do |t|
     t.string "cep"
     t.string "road"
@@ -22,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_09_28_224617) do
     t.string "district"
     t.string "city"
     t.string "states"
-    t.bigint "contact_id", null: false
+    t.integer "contact_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["contact_id"], name: "index_addresses_on_contact_id"
