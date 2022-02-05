@@ -1,5 +1,5 @@
 class SlackController < ApplicationController
   def meet
-    render json: nil
+    render json: params
   end
 end
