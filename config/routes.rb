@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # slack
-  get '/slack/meet', to: 'slack#meet', as: :meet
+  # get '/slack/meet', to: 'slack#meet', as: :meet
   post '/slack/meet', to: 'slack#meet', as: :meet
 
   # =================================================================
