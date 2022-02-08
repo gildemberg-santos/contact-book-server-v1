@@ -50,3 +50,6 @@ gem 'rack-cors', '~> 1.1'
 
 # Slack
 gem 'slack-notifier', '~> 2.4'
+
+# google-api-client
+gem 'google-api-client', '~> 0.11.1'
